@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-syncer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-syncer
+  template:
+    metadata:
+      labels:
+        app: db-syncer
+    spec:
+      containers:
+      - image: localhost:5000/db-syncer
+        name: db-syncer
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+            name: "http"
+        env:
+          - name: gingersnap_cache_uri
+            value: hotrod://_hotrod._tcp.cache-manager.gingersnap.svc.cluster-domain.example
+          - name: gingersnap_database_type
+            value: MYSQL
+          - name: gingersnap_database_host
+            value: _mysql._tcp.mysql.gingersnap.svc.cluster-domain.example
+          - name: gingersnap_database_port
+            value: '3306'
+          - name: gingersnap_database_user
+            value: gingersnap_user
+          - name: gingersnap_database_password
+            value: password

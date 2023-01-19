@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cache-manager
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cache-manager
+  template:
+    metadata:
+      name: cache-manager
+      labels:
+        app: cache-manager
+    spec:
+      containers:
+      - image: quay.io/gingersnap/cache-manager
+        name: cache-manager
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+          - containerPort: 11222
+        env:
+          - name: quarkus_datasource_reactive_url
+            value: mysql://_mysql._tcp.mysql.gingersnap.svc.cluster-domain.example:3306/debezium
