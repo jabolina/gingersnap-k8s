@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - db/service.yaml
   - db/deployment.yaml
+  - opensearch/service.yaml
+  - opensearch/deployment.yaml
   - cache-manager/service.yaml
   - cache-manager/deployment.yaml
   - db-syncer/service.yaml

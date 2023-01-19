@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opensearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opensearch
+  template:
+    metadata:
+      name: opensearch
+      labels:
+        app: opensearch
+    spec:
+      containers:
+      - image: opensearchproject/opensearch:2.4.0
+        name: opensearch
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 80
+          - containerPort: 9200
+        env:
+          - name: discovery.type
+            value: single-node
+          - name: plugins.security.ssl.http.enabled
+            value: 'false'

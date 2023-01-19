@@ -8,15 +8,9 @@ metadata:
     run: db-syncer
 spec:
   publishNotReadyAddresses: true
-  clusterIP: None
   ports:
-    - name: hotrod
-      port: 11222
-      protocol: TCP
-      targetPort: 11222
     - name: http
       port: 8080
       targetPort: 8080
   selector:
-     deploymentConfig: db-syncer
      app: db-syncer

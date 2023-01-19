@@ -20,15 +20,23 @@ spec:
           - containerPort: 8080
             name: "http"
         env:
-          - name: gingersnap_cache_uri
-            value: hotrod://_hotrod._tcp.cache-manager.gingersnap.svc.cluster-domain.example
-          - name: gingersnap_database_type
+          - name: gingersnap.cache.uri
+            value: hotrod://cache-manager
+          - name: gingersnap.database.type
             value: MYSQL
-          - name: gingersnap_database_host
-            value: _mysql._tcp.mysql.gingersnap.svc.cluster-domain.example
-          - name: gingersnap_database_port
+          - name: gingersnap.database.host
+            value: mysql
+          - name: gingersnap.database.port
             value: '3306'
-          - name: gingersnap_database_user
+          - name: gingersnap.database.user
             value: gingersnap_user
-          - name: gingersnap_database_password
+          - name: gingersnap.database.password
             value: password
+          - name: gingersnap.rule.us-east.connector.schema
+            value: debezium
+          - name: gingersnap.rule.us-east.connector.table
+            value: customer
+          - name: 'gingersnap.rule.us-east.value-columns'
+            value: fullname,email
+          - name: 'gingersnap.rule.us-east.key-columns'
+            value: fullname

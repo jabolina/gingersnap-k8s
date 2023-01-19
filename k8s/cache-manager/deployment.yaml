@@ -21,5 +21,13 @@ spec:
           - containerPort: 8080
           - containerPort: 11222
         env:
-          - name: quarkus_datasource_reactive_url
-            value: mysql://_mysql._tcp.mysql.gingersnap.svc.cluster-domain.example:3306/debezium
+          - name: quarkus.datasource.reactive.url
+            value: mysql://mysql:3306/debezium
+          - name: quarkus.elasticsearch.hosts
+            value: opensearch:9200
+          - name: quarkus.elasticsearch.username
+            value: admin
+          - name: quarkus.elasticsearch.password
+            value: admin
+          - name: service.index
+            value: opensearch
